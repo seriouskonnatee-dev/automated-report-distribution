@@ -53,12 +53,12 @@ Pipeline flow (what `src/build_report.py` actually executes):
 
 ```mermaid
 flowchart LR
-    A[data/sales_transactions.csv] --> B[Aggregate: revenue by store/category/week]
-    B --> C[Charts: matplotlib\n- revenue trend\n- top/bottom stores\n- category mix]
-    C --> D[Render HTML template]
-    D --> E[Render PDF via WeasyPrint/matplotlib PdfPages]
-    E --> F[reports/ sample output committed]
-    E --> G[email_distribution.py\n(documented stub, no real send)]
+    A["data/sales_transactions.csv"] --> B["Aggregate: revenue by store/category/week"]
+    B --> C["Charts: matplotlib<br/>revenue trend, top/bottom stores, category mix"]
+    C --> D["Render HTML template"]
+    D --> E["Render PDF via WeasyPrint/matplotlib PdfPages"]
+    E --> F["reports/ sample output committed"]
+    E --> G["email_distribution.py<br/>documented stub, no real send"]
 ```
 
 ## c) Data Dictionary
