@@ -1,0 +1,39 @@
+name: Generate Weekly Sales Report
+
+on:
+  schedule:
+    # Every Monday at 06:00 UTC
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}
+
+jobs:
+  build-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest tests/ -v
+
+      - name: Generate synthetic data
+        run: python src/generate_data.py
+
+      - name: Build report
+        run: python src/build_report.py
+
+      - name: (Documented, not executed) distribution step
+        run: python src/email_distribution.py
+
+      - name: Upload report as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-sales-report
+          path: reports/*.{html,pdf}
